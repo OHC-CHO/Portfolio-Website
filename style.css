@@ -1,0 +1,177 @@
+/* 基本样式 */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* 页眉样式 */
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: #393b3e;
+  color: white;
+  padding: 10px 0;
+  z-index: 1000;
+  text-align: center;
+}
+
+header nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+
+header nav ul li {
+  margin: 0 20px;
+}
+
+header nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* 左侧固定栏 */
+.sidebar {
+  position: fixed;
+  top: 50px; /* 页眉高度留出 */
+  left: 0;
+  width: 15%; /* 左侧固定栏宽度 */
+  height: calc(100vh - 50px); /* 高度减去页眉 */
+  background-color: #f4f4f4;
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+}
+
+.sidebar .short-bio {
+  font-style: italic;
+  margin-bottom: 20px;
+}
+
+.sidebar .contact-info h3 {
+  margin-top: 30px;
+  font-size: 1.2em;
+}
+
+.sidebar .contact-info ul {
+  padding: 0;
+  list-style: none;
+}
+
+.sidebar .contact-info li {
+  margin: 5px 0;
+}
+
+/* 主内容区域 */
+.main-content {
+  margin-left: 20%; /* 为左侧固定栏留出空间 */
+  margin-top: 75px; /* 为页眉留出空间 */
+  padding: 20px;
+  overflow-y: auto;
+}
+
+/* About Me 页面内容布局 */
+.about-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.about-text {
+  width: 65%; /* 左侧文本占比 */
+}
+
+.about-photo-container {
+  position: absolute; /* 绝对定位 */
+  top: 100px; /* 调整顶部间距 */
+  right: 0; /* 固定在页面右侧 */
+  width: 40%; /* 设置外层容器宽度 */
+  height: auto; /* 高度根据内容自适应 */
+  display: flex; /* 使用flex布局 */
+  justify-content: flex-end; /* 内容靠右对齐 */
+  align-items: center; /* 垂直居中对齐 */
+  z-index: 10; /* 确保容器在页面较前层 */
+}
+
+.about-photo {
+  width: 100%; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.about-photo img {
+  max-width: 80%; 
+  height: auto; /* 保持图片比例 */
+  object-fit: contain; /* 确保图片内容完整显示 */
+}
+
+
+/* Portfolio 区域 */
+.portfolio-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.project {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.project img {
+  max-width: 100%;
+  border-radius: 8px;
+}
+
+.project h3 {
+  margin-top: 10px;
+}
+
+/* 设置 portfolio-photo 的图片样式 */
+.portfolio-photo img {
+  display: block;
+  width: 100%; /* 确保图片在容器内不超出最大宽度 */
+}
+
+/* 返回按钮样式 */
+.has-back-btn .back-btn-container {
+  position: absolute;
+  top: 50px; 
+  left: 300px; 
+  width: 80%;
+  height: 50px;
+  background-color: rgba(255, 255, 255, 0.9);
+  z-index: 100; 
+  display: flex;
+  align-items: center; 
+  padding-left: 0;
+}
+
+.has-back-btn .back-btn {
+  font-size: 18px;
+  font-weight: bold;
+  color: #727f88;
+  text-decoration: none;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.has-back-btn .back-btn:hover {
+  text-decoration: underline; /* 鼠标悬停时添加下划线 */
+}
+
