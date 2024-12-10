@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ice Puzzle</title>
+  <link rel="stylesheet" href="style.css"> <!-- 引用全局样式 -->
+</head>
+<body>
+  <!-- 页眉 -->
+  <header>
+    <nav>
+      <ul>
+        <li><a href="about.html">About Me</a></li>
+        <li><a href="portfolio.html">Portfolio</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- 左侧边栏 -->
+  <aside class="sidebar">
+    <h2 class="sidebar-name">Qizhen CHEN</h2>
+    <p class="short-bio">"Sound, technology, and creativity."</p>
+    <div class="contact-info">
+      <h3>Contact Me</h3>
+      <ul>
+        <li>Tel: +86 13052023593</li>
+        <li>Email: PhyllisCHEN2025@outlook.com</li>
+      </ul>
+    </div>
+  </aside>
+
+  <!-- 返回按钮 -->
+  <body class="has-back-btn">
+    <div class="back-btn-container">
+      <a href="portfolio.html" class="back-btn">← Back to Portfolio</a>
+    </div>
+  </body>  
+  
+  <!-- 主内容 -->
+  <main class="main-content">
+    <section class="project-details">
+      <h1>Ice Puzzle</h1>
+      <video width="100%" controls>
+        <source src="assets/videos/1. Ice_Puzzle.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <section>
+        <h2>Background</h2>
+        <p>
+            In recent years, climate change driven by global warming has been accelerating and threatening the ecological balance of Earth. The glaciers in the Arctic are melting at an unprecedented rate, and this extreme environmental change is causing the polar bear, a symbol of the snowy world, to gradually lose its habitat. They face not only shrinking living spaces but also food shortages and the destruction of their environment. The plight of the polar bear reflects the global environmental crisis, serving as a silent testament to the devastating effects of climate change on natural life. Meanwhile, human industrialization, with its carbon emissions and over-exploitation, exacerbates this crisis. The collapse of glaciers and the hum of industrial machinery sharply contrast the silent struggle of nature, often ignored by humanity. This work aims to use art to raise awareness about global warming and encourage a reevaluation of the human-nature relationship.
+        </p>
+      </section>
+      <section>
+          <h2>Concept</h2>
+          <p>
+              Ice_Puzzle is an interactive sound art project that tells the journey of a polar bear searching for hope in a snowy world. The "treasure" in the narrative symbolizes the rebuilding of nature and a shared vision for the future. During the journey, the participant will experience alternating moments of crisis and hope, which not only represents an exploration but also serves as a reflection on ecological fate. The project conveys the message that despite the severity of global warming, even the smallest actions can spark new possibilities for nature. The light of hope, though small, can illuminate the path forward when we work together.
+          </p>
+      </section>
+      <section>
+          <h2>Sound Design</h2>
+          <p>
+              I designed a low-frequency rumble "storm" by layering multiple sine and triangle waves, inspired by Luigi Russolo’s The Art of Noises. This sound symbolizes industrial noise, reflecting the profound environmental damage caused by carbon emissions. To avoid auditory fatigue, I created two versions of the sound: one with a fixed base frequency and another modulated with an LFO to introduce greater variability and depth.
+          </p>
+          <p>
+              For high frequencies, I used FM synthesis to create a "star" sound that symbolizes hope. The sound is triggered by a sequencer and employs the Dorian mode to evoke a subtle sense of hope.
+          </p>
+          <p>
+              In the mid-frequency range, I incorporated a descending Shepard tone, creating the illusion of a continuously falling frequency, symbolizing the unfairness of fate and the helplessness of nature in the face of global warming.
+          </p>
+          <p>
+              I also added a looping ambient sound to enrich the frequency spectrum, creating a "warm" yet uneasy texture that echoes the theme of global warming and provides emotional depth.
+          </p>
+      </section>
+      <section>
+          <h2>System Design</h2>
+          <p>
+              Before the game starts, I set the initial positions of the polar bear and the treasure using random coordinates mapped to the screen size. The interactive design allows users to engage through body movements. Leveraging an open-source program from GitHub, I captured hand poses through the camera and transmitted the data to my main program to control the polar bear’s movements. The direction of movement is determined by the mouse’s position, divided into four quadrants on the screen.
+          </p>
+      </section>
+      <section>
+          <h2>Interaction Design</h2>
+          <p>
+              As the design incorporates game elements, the sound interaction also follows some game sound design strategies to guide the user.
+          </p>
+          <p>
+              The distance between the polar bear and the treasure serves as the primary parameter guiding the interaction toward the final goal. I modulated the low-frequency rumble with the distance between the bear and the treasure. As the distance decreased, the rumble became narrower, indicating the changing proximity. The “star” sound becomes more ordered as the bear approaches the treasure, symbolizing the imminent realization of hope. The Shepard tone volume decreases, signifying the bear’s victory over fate. Every time the bear moves, an ice crack sound is triggered. The sound of cracking ice becomes louder when the bear is far from the treasure and softer as it nears, creating a sense of safety and progress.
+          </p>
+          <p>
+              Additionally, the speed of the star's flicker is modulated by the speed of the bear’s movement, further enhancing the user’s perception of speed.
+          </p>
+      </section>
+    </section>
+  </main>
+</body>
+</html>

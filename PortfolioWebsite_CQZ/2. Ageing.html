@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ice Puzzle</title>
+  <link rel="stylesheet" href="style.css"> <!-- 引用全局样式 -->
+</head>
+<body>
+  <!-- 页眉 -->
+  <header>
+    <nav>
+      <ul>
+        <li><a href="about.html">About Me</a></li>
+        <li><a href="portfolio.html">Portfolio</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- 左侧边栏 -->
+  <aside class="sidebar">
+    <h2 class="sidebar-name">Qizhen CHEN</h2>
+    <p class="short-bio">"Sound, technology, and creativity."</p>
+    <div class="contact-info">
+      <h3>Contact Me</h3>
+      <ul>
+        <li>Tel: +86 13052023593</li>
+        <li>Email: PhyllisCHEN2025@outlook.com</li>
+      </ul>
+    </div>
+  </aside>
+
+  <!-- 返回按钮 -->
+  <body class="has-back-btn">
+    <div class="back-btn-container">
+      <a href="portfolio.html" class="back-btn">← Back to Portfolio</a>
+    </div>
+  </body>  
+  
+  <!-- 主内容 -->
+  <main class="main-content">
+    <section class="project-details">
+      <h1>Ageing</h1>
+      <video width="100%" controls>
+        <source src="assets/videos/2. Ageing.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <section>
+        <h2>Background</h2>
+        <p>
+            Hearing is a crucial means of connecting individuals with the world. As the body ages and hearing declines, this connection gradually weakens, eventually facing death in solitude.
+        </p>
+        <p>
+            We live in an era of rapid population aging, where aging is not only an inevitable part of individual life but also a significant challenge for social structures and public policy. According to the United Nations, the global population aged 60 and above is projected to reach 2.2 billion by 2050, accounting for over 21% of the total population. This phenomenon has profound implications across healthcare, economics, family structures, and sociocultural dimensions.
+        </p>
+      </section>
+      <section>
+          <h2>Concept</h2>
+          <p>
+              The inspiration for this project comes from a personal experience. My grandfather, who suffered significant hearing loss due to aging, once sat silently during a lively family gathering. Despite the presence of his families, he seemed isolated, only responding when my father repeated calling him loudly two or three times. At that moment, I realized how profoundly hearing impacts daily life, especially for the elderly, yet it is often overlooked.
+          </p>
+          <p>
+              This project aims to allow participants to experience the process of hearing loss and aging, fostering a deeper understanding not only of the physical challenges as well as emotional isolation. Through this immersive experience, I hope to evoke empathy and understanding for the elderly, encouraging society to create a more inclusive and supportive environment in response to population aging. As time moves forward, we will all experience aging. It is our shared responsibility to create a friendlier environment for both our future selves and the current elderly.
+          </p>
+      </section>
+      <section>
+          <h2>Sound Design and Processing</h2>
+          <p>
+              To authentically recreate the auditory effects of age-related hearing loss, I consulted various medical and sociological journals. From Lin, F. R. (2024). Age-related hearing loss. New England Journal of Medicine, 390(16), 1505–1512, I learned that age-related hearing loss typically begins with high frequencies and gradually extends to mid and low frequencies, with auditory environments (such as reverberation) also impacting perception. Loughrey, D. G., Kelly, M. E., Kelley, G. A., Brennan, S., & Lawlor, B. A. (2018). Association of age-related hearing loss with cognitive function, cognitive impairment, and dementia: A systematic review and meta-analysis. JAMA Otolaryngology–Head & Neck Surgery, 144(2), 115–126, introduced the use of Hilbert transforms to separate temporal fine structure (TFS) and envelope (E) information, revealing significantly reduced TFS processing abilities in individuals with hearing loss, especially the elderly.
+          </p>
+          <p>
+              Based on these findings, I divided the hearing loss process into three stages—mild, moderate, and severe—each with distinct processing methods:
+          </p>
+          <ul>
+              <li><strong>Mild Loss:</strong> Gradual frequency reduction starting from the high frequencies (e.g., starting at 20 kHz).</li>
+              <li><strong>Moderate Loss:</strong> Hilbert transformation separates TFS, and the E component's volume gradually increases while further frequency attenuation occurs.</li>
+              <li><strong>Severe Loss:</strong> Reverberation is introduced to reduced signal-to-noise ratio (SNR), rendering speech nearly unintelligible.</li>
+          </ul>
+      </section>
+      <section>
+          <h2>Coding Implementation</h2>
+          <p>
+              After completing research, I began coding. Initially, I structured the program into five components: Main, GUI, Mild, Moderate, and Severe. Each stage was designed as a standalone effect, with the GUI facilitating transitions. However, during the process of coding, I realized a more efficient object-oriented approach. Instead of discrete stages, I implemented real-time monitoring and playback through dynamic effect adjustments (filtering, Hilbert transformation, and reverberation), based on the GUI's progress bar representing the degree of hearing loss.
+          </p>
+          <p>
+              For instance:
+          </p>
+          <ul>
+              <li><strong>Low-pass filter:</strong> The cutoff frequency logarithmically decreases from 20 kHz to 2 kHz as the progress bar moves from 0 to 100%.</li>
+              <li><strong>Hilbert transformation:</strong> The E component’s volume increases from 0% at 30% progress.</li>
+              <li><strong>Reverberation:</strong> Wet/dry mix increases from 0% at 70% progress.</li>
+          </ul>
+          <p>
+              After finalizing the framework, I optimized the GUI for precision and improved the AudioProcessor class to save processed audio for review. Using the wave module, I stored audio data in WAV format for easier analysis.
+          </p>
+          <p>
+              During testing, I noticed periodic high-frequency glitches when adjusting the progress bar too quickly or near the 30% mark. Drawing from my Interactive Media System Design Ⅰ coursework, I identified the issue as spectral leakage. This was caused by discontinuities at block boundaries during the Hilbert transformation, resulting in unnatural transitions and artifacts. By addressing these challenges, the project successfully simulates hearing loss, providing an immersive, impactful exploration of aging.
+          </p>
+      </section>
+      <section>
+          <h2>Future Work</h2>
+          <p>
+              As the current work is limited to software, I hope to integrate this program into headphone hardware in the future, allowing users to wear it in daily life and better immerse themselves in the inconveniences caused by age-related hearing loss. This would require extending the experience duration, necessitating further optimization of memory and CPU usage.
+          </p>
+          <p>
+              In addition, more detailed testing is required. For instance, the current audio input and output are mono; should it be upgraded to stereo? Would a stereo format positively enhance the user experience? Moreover, during my testing, I found that the progress bar design is not particularly intuitive in terms of auditory feedback. Replacing it with three distinct buttons corresponding to different levels of hearing loss might make it more practical for hardware integration.
+          </p>
+          <p>
+              Other aspects, such as the headphones’ physical design, further refinement of auditory effects, and determining the optimal experience duration and settings, still require extensive testing and development. I look forward to completing this project in the near future.
+          </p>
+      </section>
+    </section>
+  </main>
+</body>
+</html>
