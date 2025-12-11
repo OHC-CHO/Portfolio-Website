@@ -1,83 +1,265 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About Me</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phyllis CHEN | Music Technology Portfolio</title>
+    <style>
+        /* --- CSS STYLES: 网站样式表 --- */
+        :root {
+            --bg-color: #121212;
+            --card-bg: #1e1e1e;
+            --text-main: #e0e0e0;
+            --text-secondary: #a0a0a0;
+            --accent: #74dcff; /* 科技蓝高亮色 */
+            --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background-color: var(--bg-color); color: var(--text-main); font-family: var(--font-main); line-height: 1.6; }
+        a { text-decoration: none; color: var(--accent); transition: 0.3s; }
+        a:hover { color: #fff; }
+        
+        /* 导航栏 */
+        nav { position: fixed; top: 0; width: 100%; background: rgba(18, 18, 18, 0.95); padding: 1.5rem; z-index: 1000; border-bottom: 1px solid #333; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.5rem; font-weight: bold; color: #fff; }
+        .nav-links { list-style: none; display: flex; gap: 2rem; }
+        .nav-links a { color: var(--text-main); font-weight: 500; }
+        
+        /* 通用布局 */
+        section { padding: 4rem 2rem; max-width: 1200px; margin: 0 auto; }
+        h1, h2, h3 { color: #fff; margin-bottom: 1rem; }
+        h2 { border-left: 4px solid var(--accent); padding-left: 1rem; margin-bottom: 2rem; font-size: 2rem; }
+        
+        /* Header / Hero Section */
+        #home { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; padding-top: 60px; }
+        .hero-content { max-width: 800px; }
+        .hero-title { font-size: 3.5rem; line-height: 1.2; margin-bottom: 1rem; }
+        .hero-subtitle { font-size: 1.5rem; color: var(--text-secondary); margin-bottom: 2rem; }
+        .btn { display: inline-block; padding: 0.8rem 2rem; background: var(--accent); color: #000; font-weight: bold; border-radius: 5px; margin-right: 1rem; }
+        .btn:hover { background: #fff; }
+        
+        /* Resume Section */
+        .resume-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+        .resume-item { margin-bottom: 2rem; border-left: 1px solid #333; padding-left: 1.5rem; position: relative; }
+        .resume-item::before { content: ''; position: absolute; left: -5px; top: 0; width: 10px; height: 10px; background: var(--accent); border-radius: 50%; }
+        .date { font-size: 0.9rem; color: var(--accent); font-family: monospace; }
+        .skills-list span { display: inline-block; background: #333; padding: 0.3rem 0.8rem; border-radius: 15px; margin: 0.2rem; font-size: 0.9rem; }
+
+        /* --- 新的 Grid 样式: 适用于封面图展示 --- */
+        .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; }
+        
+        .project-card { 
+            background: var(--card-bg); 
+            border-radius: 8px; 
+            overflow: hidden; 
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+        }
+        .project-card:hover { 
+            transform: translateY(-5px); 
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+        }
+        .project-card:hover h3 { color: var(--accent); }
+
+        /* 封面图容器 */
+        .card-image {
+            width: 100%;
+            height: 200px; /* 固定高度，保持整齐 */
+            background-color: #333; /* 图片加载前的占位色 */
+            position: relative;
+            overflow: hidden;
+        }
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* 保证图片填满且不变形 */
+        }
+        .placeholder-text {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            color: #555; font-size: 0.8rem; text-align: center;
+        }
+
+        .project-info { padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
+        .tech-tag { color: var(--accent); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem; display: block; }
+        .read-more { margin-top: 1rem; color: var(--accent); font-size: 0.9rem; font-weight: bold; }
+
+        /* Footer */
+        footer { text-align: center; padding: 3rem; background: #000; margin-top: 4rem; color: var(--text-secondary); }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .resume-grid { grid-template-columns: 1fr; }
+            .hero-title { font-size: 2.5rem; }
+            .nav-links { display: none; } /* 简化版：移动端隐藏菜单，实际需添加汉堡菜单 */
+        }
+    </style>
 </head>
 <body>
-  <!-- 页眉 -->
-  <header>
+
     <nav>
-      <ul>
-        <li><a href="index.html">About Me</a></li>
-        <li><a href="portfolio.html">Portfolio</a></li>
-      </ul>
+        <div class="logo">Phyllis CHEN</div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#music-tech">Music Tech</a></li>
+            <li><a href="#traditional">Traditional Sound</a></li>
+        </ul>
     </nav>
-  </header>
 
-  <!-- 左侧边栏 -->
-  <aside class="sidebar">
-    <h2 class="sidebar-name">Qizhen CHEN</h2>
-    <p class="short-bio">"Sound, technology, and creativity."</p>
-    <div class="contact-info">
-      <h3>Contact Me</h3>
-      <ul>
-        <li>Tel: +86 13052023593</li>
-        <li>Email: PhyllisCHEN2025@outlook.com</li>
-      </ul>
-    </div>
-</aside>
+    <section id="home">
+        <div class="hero-content">
+            <h1 class="hero-title">Hello, I'm Phyllis Chen.<br>Exploring the Convergence of <span style="color:var(--accent)">Sound & Technology</span>.</h1>
+            <p class="hero-subtitle"> Audio Programmer / Interactive Sound Designer / Vocalist / Researcher</p>
+            
+            <div style="margin-top: 20px;">
+                <a href="#music-tech" class="btn">View Portfolio</a>
+                <a href="mailto:PhyllisCHEN2025@outlook.com" class="btn" style="background:transparent; border:1px solid #fff; color:#fff;">Contact Me</a>
+            </div>
 
-
-  <!-- About 内容 -->
-  <main class="main-content">
-    <section class="about-section">
-      <h2>About Me</h2>
-      <p>Qi’zhen CHEN</p> 
-      <p>Interactive Sound Designer/Audio Programmer</p>
-      <h3>Research Interest</h3>
-      <p>Audio Signal Processing, Spacial Audio, Sound Synthesis..., Everything about sound! </p>
-
-      <div class="about-photo-container">
-        <div class="about-photo">
-          <img src="assets/images/your-photo.jpg" alt="About Photo" />
+            <div style="margin-top: 30px; font-size: 1.5rem;">
+                <a href="https://www.linkedin.com/in/琪蓁-陈-b21a5838a/" target="_blank" style="margin-right: 15px;">LinkedIn</a>
+                <a href="https://space.bilibili.com/239345572?spm_id_from=333.1007.0.0" target="_blank" style="margin-right: 15px;">Bilibili</a>
+                <a href="https://xhslink.com/m/5b3MFpRc3Fl" target="_blank">RedNote</a>
+            </div>
         </div>
-      </div>
-      
-      <h3>Education Experience</h3>
-      <ul>
-        <li>Sep.2021~Present | Beijing Film Academy,Sound School
-          <ul>
-            <li>Major: Art and Technology</li>
-            <li>Game and Interactive Sound Design</li>
-          </ul>
-        </li>
-      </ul>
-
-      <h3>Work Experience</h3>
-      <ul>
-        <li>Jul.2024~Aug.2024 | Aurogon Info&Tech (Shanghai) Co., Ltd
-          <ul>
-            <li>Internship：Junior Sound Designer</li>
-            <li>Game project “Ash Echoes”</li>
-          </ul>
-        </li>
-      </ul>
-      
-      <h3>Skills & Tools</h3>
-      <ul>
-        <li>Programming: C++, Python, R</li>
-        <li>Musical Skills: Vocal(bel canto/musical/pop), Piano</li>
-        <li>DAW: Pro Tools, Ableton Live</li>
-        <li>Game Audio Middleware: Wwise, FMOD</li>
-        <li>Game Engines: Unity, Unreal Engine (UE)</li>
-      </ul>
-      
     </section>
-  </main>
 
-  <script src="script.js"></script>
+    <section id="about">
+        <h2>About Me</h2>
+        <div class="resume-grid">
+            
+            <div>
+                <h3>Education</h3>
+                
+                <div class="resume-item">
+                    <div class="date">2025.09 - Present</div>
+                    <h4>MSc Acoustics and Music Technology</h4>
+                    <p>University of Edinburgh, Edinburgh College of Art</p>
+                    <p style="font-size:0.9rem; color:#aaa;">Focus: Acoustics, DSP, Audio ML, Physics-based Modeling.</p>
+                </div>
+
+                <div class="resume-item">
+                    <div class="date">2021.09 - 2025.06</div>
+                    <h4>BA Art and Technology (Game & Interactive Sound)</h4>
+                    <p>Beijing Film Academy, Sound School</p>
+                    <p style="font-size:0.9rem; color:#aaa;">Excellent Graduate</p>
+                    <p style="font-size:0.9rem; color:#aaa;">Focus: Creative Audio Coding, Game Sound Design, Film & Music Sound Production.</p>
+                </div>
+
+                <div class="resume-item">
+                    <div class="date">2022.09 - 2025.06</div>
+                    <h4>Minor in Economics</h4>
+                    <p>Peking University</p>
+                </div>
+            </div>
+
+            <div>
+                <h3>Experience & Skills</h3>
+                
+                <div class="resume-item">
+                    <div class="date">2024.07 - 2024.08</div>
+                    <h4>Junior Sound Designer (Intern)</h4>
+                    <p>Aurogon Info&Tech (Shanghai)</p>
+                    <p style="font-size:0.9rem; color:#aaa;">Game "Ash Echoes": Asset creation & FMOD/UE integration.</p>
+                </div>
+
+                <div class="resume-item">
+                    <div class="date">2024.03 - 2024.06</div>
+                    <h4>Game Sound Designer (Co-op)</h4>
+                    <p>Hero Games Interactive Entertainment</p>
+                    <p style="font-size:0.9rem; color:#aaa;">Wwise configuration for game audio systems.</p>
+                </div>
+
+                <div style="margin-top: 2rem;">
+                    <h4>Technical Skills</h4>
+                    <div class="skills-list">
+                        <span>Max/MSP</span>
+                        <span>Pure Data</span>
+                        <span>C++</span>
+                        <span>Python</span>
+                        <span>Matlab</span>
+                        <span>Unity</span>
+                        <span>Unreal Engine</span>
+                        <span>Wwise</span>
+                        <span>FMOD</span>
+                        <span>Pro Tools</span>
+                        <span>Arduino</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="musictech">
+        <h2>Music Tech & Interactive Systems</h2>
+        <div class="portfolio-grid">
+            
+            <a href="project_Tang.html" class="project-card"> <div class="card-image">
+                    <img src="./image/Tang_cover.jpg" alt="Tang Cover" onerror="this.style.display='none'">
+                </div>
+                <div class="project-info">
+                    <div>
+                        <span class="tech-tag">Pure Data / Unity / Installation</span>
+                        <h3>Echoes of Tang: Sounds of Bashu</h3>
+                        <p>Interactive music installation illustrates the culture of music and dance in Tang dynasty.</p>
+                    </div>
+                    <div class="read-more">View Project Details &rarr;</div>
+                </div>
+            </a>
+
+            <a href="project_Shake8.html" class="project-card">
+                <div class="card-image">
+                    <img src="./image/Shake8_cover.jpg" alt="Shake8 Device" onerror="this.style.display='none'">
+                </div>
+                <div class="project-info">
+                    <div>
+                        <span class="tech-tag">Arduino / M5Core2 / I2S</span>
+                        <h3>Shake8: Interactive Music Toy</h3>
+                        <p>Handheld rhythm-game device with custom randomization algorithms.</p>
+                    </div>
+                    <div class="read-more">View Project Details &rarr;</div>
+                </div>
+            </a>
+
+            <a href="project_ice.html" class="project-card">
+                <div class="card-image">
+                    <img src="./image/ice_cover.jpg" alt="Ice Puzzle" onerror="this.style.display='none'">
+                </div>
+                <div class="project-info">
+                    <div>
+                        <span class="tech-tag">Max&Msp / Gesture Control / Sound Modulation</span>
+                        <h3>Ice_Puzzle</h3>
+                        <p>Gamified narrative sound artwork about global warming.</p>
+                    </div>
+                    <div class="read-more">View Project Details &rarr;</div>
+                </div>
+            </a>
+
+            <a href="project_Ageing.html" class="project-card">
+                <div class="card-image">
+                    <img src="./image/Ageing_cover.jpg" alt="Aging Simulation" onerror="this.style.display='none'">
+                </div>
+                <div class="project-info">
+                    <div>
+                        <span class="tech-tag">Python / DSP / Psychoacoustics</span>
+                        <h3>Aging: Sound Installation</h3>
+                        <p>Real-time simulator recreating the experience of hearing loss.</p>
+                    </div>
+                    <div class="read-more">View Project Details &rarr;</div>
+                </div>
+            </a>
+
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Phyllis CHEN. All rights reserved.</p>
+        <p>Email: <a href="mailto:PhyllisCHEN2025@outlook.com">PhyllisCHEN2025@outlook.com</a></p>
+        <p style="margin-top: 10px; font-size: 0.8rem;">Built with Code & Music.</p>
+    </footer>
+
 </body>
 </html>
