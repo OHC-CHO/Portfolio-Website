@@ -89,6 +89,79 @@
         /* Footer */
         footer { text-align: center; padding: 3rem; background: #000; margin-top: 4rem; color: var(--text-secondary); }
 
+        /* --- Video Modal (灯箱) 样式 --- */
+        .video-modal {
+            display: none; /* 默认隐藏 */
+            position: fixed;
+            z-index: 2000; /* 保证在最顶层 */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9); /* 深色半透明背景 */
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            position: relative;
+            width: 80%;
+            max-width: 900px;
+            aspect-ratio: 16/9; /* 锁定视频比例 */
+            background: #000;
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .modal-content iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            line-height: 1;
+        }
+        .close-btn:hover { color: var(--accent); }
+
+        /* --- 给传统作品封面加一个播放按钮图标 --- */
+        .play-overlay {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50px; height: 50px;
+            background: rgba(0,0,0,0.6);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            border: 2px solid #fff;
+            transition: 0.3s;
+            opacity: 0.8;
+        }
+        .play-overlay::after {
+            content: '▶';
+            color: #fff;
+            font-size: 20px;
+            margin-left: 3px; /* 微调三角位置 */
+        }
+        .project-card:hover .play-overlay {
+            background: var(--accent);
+            border-color: var(--accent);
+            opacity: 1;
+            color: #000; /* 悬停变色 */
+        }
+
         /* Mobile Responsive */
         @media (max-width: 768px) {
             .resume-grid { grid-template-columns: 1fr; }
@@ -255,11 +328,113 @@
         </div>
     </section>
 
+    <section id="traditional">
+        <h2>02. Traditional Sound Design</h2>
+        <p style="margin-bottom: 2rem; color: #aaa;">Film sound, game audio, and mixing projects. </p>
+
+        <div class="portfolio-grid">
+            
+            <div class="project-card" onclick="openModal('https://www.youtube.com/embed/JIiS-_V7deg?si=kJgV7sLepuCEwIXz')">
+                <div class="card-image">
+                    <img src="./image/DLCXWFJ_cover.jpg" alt="DLCXWFJ Cover" onerror="this.style.display='none'">
+                    <div class="play-overlay"></div>
+                </div>
+                <div class="project-info">
+                    <span class="tech-tag">Film Sound / 5.1 Mixing</span>
+                    <h3>A Round Trip Between City and Countryside</h3>
+                    <p>Beijing Film Academy 2025 Undergraduate Co-Operation Graduation Project.</p>
+                </div>
+            </div>
+
+            <div class="project-card" onclick="openModal('https://www.youtube.com/embed/Sjy2-Y9vEYU?si=LEuvaEFa4JUCraHu')">
+                <div class="card-image">
+                    <img src="./image/ShiYin_cover.jpg" alt="ShiYin Cover" onerror="this.style.display='none'">
+                    <div class="play-overlay"></div>
+                </div>
+                <div class="project-info">
+                    <span class="tech-tag">Film Sound / Stereo</span>
+                    <h3>ShiYin (Lost Her Voice)</h3>
+                    <p>Beijing Film Academy Department of Cinematography, 2024 Undergraduate Graduation Project.</p>
+                </div>
+            </div>
+
+            <div class="project-card" onclick="openModal('https://drive.google.com/file/d/ACFA0462B509F7D6/preview')">
+                <div class="card-image">
+                    <img src="./image/BJHL_cover.jpg" alt="BJHL Cover" onerror="this.style.display='none'">
+                    <div class="play-overlay"></div>
+                </div>
+                <div class="project-info">
+                    <span class="tech-tag">Game Sound Design / FMOD & UE Implementation</span>
+                    <h3>Ash Echoes</h3>
+                    <p>Created comprehensive sound assets for a stylized animation game.</p>
+                </div>
+            </div>
+
+            <div class="project-card" onclick="openModal('https://www.youtube.com/embed/EzB4YfbTrhk?si=aRdFwd3FHeIGeTrx')">
+                <div class="card-image">
+                    <img src="./image/Genshin_cover.jpg" alt="Genshin Cover" onerror="this.style.display='none'">
+                    <div class="play-overlay"></div>
+                </div>
+                <div class="project-info">
+                    <span class="tech-tag">Game Sound Design / SFX Design</span>
+                    <h3>Genshin Impact</h3>
+                    <p>Sound effect design for Genshin Impact boss battle cutscenes.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <div id="video-modal" class="video-modal" onclick="closeModal()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <iframe id="modal-iframe" src="" allow="autoplay; fullscreen"></iframe>
+        </div>
+    </div>
+    
     <footer>
         <p>&copy; 2025 Phyllis CHEN. All rights reserved.</p>
         <p>Email: <a href="mailto:PhyllisCHEN2025@outlook.com">PhyllisCHEN2025@outlook.com</a></p>
         <p style="margin-top: 10px; font-size: 0.8rem;">Built with Code & Music.</p>
     </footer>
 
+    <script>
+        // 打开模态框函数
+        function openModal(videoUrl) {
+            const modal = document.getElementById('video-modal');
+            const iframe = document.getElementById('modal-iframe');
+            
+            // 设置视频地址
+            iframe.src = videoUrl;
+            
+            // 显示模态框
+            modal.style.display = 'flex';
+            
+            // 禁止背景滚动
+            document.body.style.overflow = 'hidden';
+        }
+
+        // 关闭模态框函数
+        function closeModal() {
+            const modal = document.getElementById('video-modal');
+            const iframe = document.getElementById('modal-iframe');
+            
+            // 关键：清空 src 以停止视频播放声音
+            iframe.src = ''; 
+            
+            // 隐藏模态框
+            modal.style.display = 'none';
+            
+            // 恢复背景滚动
+            document.body.style.overflow = 'auto';
+        }
+
+        // 监听 ESC 键关闭
+        document.addEventListener('keydown', function(event) {
+            if (event.key === "Escape") {
+                closeModal();
+            }
+        });
+    </script>
 </body>
 </html>
